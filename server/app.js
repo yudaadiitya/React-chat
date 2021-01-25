@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-var cors = require('cors')
+const cors = require('cors')
 
 // Mongoose connect
 mongoose.connect('mongodb://localhost/chatdb', {

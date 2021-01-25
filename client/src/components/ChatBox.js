@@ -3,6 +3,7 @@ import ChatForm from "./ChatForm";
 import ChatList from "./ChatList";
 import axios from "axios";
 import { io } from "socket.io-client";
+import Swal from 'sweetalert2';
 
 const socket = io('http:localhost:3001');
 
@@ -90,20 +91,36 @@ export default class ChatBox extends Component {
     }
 
 
-
-
     removeChat(id) {
-        this.setState((state, props) => ({
-            data: state.data.filter(item => item.id !== id)
-        }));
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This message will be deleted !",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#08db93',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No!',
+        }).then(result => {
+            if (result.value) {
+                this.setState((state, props) => ({
+                    data: state.data.filter(item => item.id !== id)
+                }));
 
-        socket.emit('delete-data', {id})
+                socket.emit('delete-data', { id })
 
-        //delete beckend chat
-        request.delete(`chats/${id}`).then(data => {
-            console.log(data);
-        }).catch(err => {
-            console.log(err);
+                //delete beckend chat
+                request.delete(`chats/${id}`).then(data => {
+                    Swal.fire({
+                        type: 'success',
+                        title: 'chat has been deleted',
+                        showConfirmationButton: false,
+
+                    })
+                }).catch(err => {
+                    console.log(err);
+                })
+            }
         })
     }
 
@@ -148,12 +165,12 @@ export default class ChatBox extends Component {
                         <div className="title">React Chat</div>
                     </div>
                     <div>
-                    <ul className="messages">
-                        <ChatList data={this.state.data} remove={this.removeChat} resend={this.resendChat} />
-                    </ul>
+                        <ul className="messages">
+                            <ChatList data={this.state.data} remove={this.removeChat} resend={this.resendChat} />
+                        </ul>
                     </div>
                     <div>
-                    <ChatForm add={this.addChat} />
+                        <ChatForm add={this.addChat} />
                     </div>
                 </div>
             </div>

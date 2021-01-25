@@ -9,13 +9,16 @@ body,html{
     */
   background: rgb(2, 157, 246);
      background: linear-gradient(40deg, rgb(146, 146, 146) 0%, rgb(151, 151, 151) 100%);
+     background-image: url("b.jpg");
+     background-position: center center fixed;
+
 }
 
 .chat_window {
   position: absolute;
   width: calc(100% - 20px);
   max-width: 800px;
-  height: 500px;
+  height: 600px;
   border-radius: 10px;
   background-color: #fff;
   left: 50%;
@@ -29,7 +32,7 @@ body,html{
 .top_menu {
   background-color: #fff;
   width: 100%;
-  padding: 20px 0 15px;
+  padding: 10px 0 10px;
   box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
 }
 .top_menu .buttons {
@@ -55,8 +58,10 @@ body,html{
 }
 .top_menu .title {
   text-align: center;
-  color: #bcbdc0;
-  font-size: 20px;
+  color: #fc944ee5;
+  font-size: 40px;
+  font-family: 'ubuntu', 'Arial Narrow', Arial, sans-serif;
+
 }
 
 .messages {
@@ -64,7 +69,7 @@ body,html{
   list-style: none;
   padding: 20px 10px 0 10px;
   margin: 0;
-  height: 347px;
+  height: 400px;
   overflow: auto;
 }
 .messages .message {
@@ -154,7 +159,7 @@ body,html{
 }
 .bottom_wrapper .message_input_wrapper {
   display: inline-block;
-  height: 25px;
+  height: 35px;
   border-radius: 25px;
   border: 1px solid #bcbdc0;
   width: calc(100% - 1px);
